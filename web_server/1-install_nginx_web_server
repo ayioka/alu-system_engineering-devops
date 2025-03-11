@@ -1,8 +1,20 @@
-#!/usr/bin/env bash
-# Installs nginx server
+#!/bin/bash
 
-sudo apt-get update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-sudo echo "Welcome John Obure to Holberton School :)" > /var/www/html/index.html
-sudo service nginx start
+# Update package lists
+apt-get update -y
+
+# Install Nginx
+apt-get install -y nginx
+
+# Ensure Nginx is running
+service nginx start
+
+# Create a custom HTML page with "Holberton School for the win!"
+echo "Holberton School for the win!" > /var/www/html/index.html
+
+# Allow traffic on port 80 (if using UFW)
+ufw allow 80/tcp
+
+# Restart Nginx without systemctl
+kill -HUP $(pgrep nginx)
+
