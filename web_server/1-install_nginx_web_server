@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 # Installs nginx server
 
-sudo apt-get update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-sudo echo "Welcome Shem Ayioka to Holberton School :)" > /var/www/html/index.html
-sudo service nginx start
+apt-get update -y
+apt-get install -y nginx
+service nginx start
+echo "Holberton School" > /var/www/html/index.html
+ufw allow 80/tcp
+kill -HUP $(pgrep nginx)
+echo "service nginx start" >> /etc/rc.local
+chmod +x /etc/rc.local
+
